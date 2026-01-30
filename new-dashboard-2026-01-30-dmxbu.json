@@ -24,7 +24,20 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "links": [],
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/MissingRoberto/grafana-manifests-experiments/blob/main/new-dashboard-2026-01-30-dmxbu.json"
+      }
+    ],
     "panels": [
       {
         "datasource": {
@@ -88,8 +101,8 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 12,
+          "h": 17,
+          "w": 22,
           "x": 0,
           "y": 0
         },
@@ -117,7 +130,7 @@
             "refId": "A"
           }
         ],
-        "title": "New panel",
+        "title": "New name!!!",
         "type": "timeseries"
       }
     ],
