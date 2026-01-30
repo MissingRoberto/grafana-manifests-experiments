@@ -25,7 +25,20 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "links": [],
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/MissingRoberto/grafana-manifests-experiments/blob/main/gitsync-intro.json"
+      }
+    ],
     "panels": [
       {
         "fieldConfig": {
@@ -60,7 +73,7 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "continuous-reds"
+              "mode": "continuous-GrYlRd"
             },
             "mappings": [],
             "thresholds": {
@@ -100,7 +113,9 @@
           "namePlacement": "auto",
           "orientation": "horizontal",
           "reduceOptions": {
-            "calcs": ["lastNotNull"],
+            "calcs": [
+              "lastNotNull"
+            ],
             "fields": "",
             "values": false
           },
@@ -118,7 +133,7 @@
             "refId": "A"
           }
         ],
-        "title": "Awesome Bar Gauge",
+        "title": "Awesome Bar Gauge in Green",
         "type": "bargauge"
       },
       {
@@ -198,7 +213,7 @@
       }
     ],
     "preload": false,
-    "schemaVersion": 41,
+    "schemaVersion": 42,
     "tags": [],
     "templating": {
       "list": []
@@ -209,6 +224,7 @@
     },
     "timepicker": {},
     "timezone": "browser",
-    "title": "Git Sync Demo Dashboard"
+    "title": "Git Sync Demo Dashboard",
+    "weekStart": ""
   }
 }
