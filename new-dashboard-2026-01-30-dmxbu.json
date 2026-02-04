@@ -151,8 +151,8 @@
                 "kind": "ElementReference",
                 "name": "panel-1"
               },
-              "height": 12,
-              "width": 16,
+              "height": 13,
+              "width": 8,
               "x": 0,
               "y": 0
             }
