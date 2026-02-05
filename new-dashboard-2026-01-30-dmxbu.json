@@ -101,8 +101,8 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 16,
-          "w": 21,
+          "h": 17,
+          "w": 10,
           "x": 0,
           "y": 0
         },
@@ -120,7 +120,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.4.0-21531533851",
+        "pluginVersion": "9.2.0",
         "targets": [
           {
             "datasource": {
