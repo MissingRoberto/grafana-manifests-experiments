@@ -1,0 +1,10 @@
+{
+  "apiVersion": "folder.grafana.app/v1beta1",
+  "kind": "Folder",
+  "metadata": {
+    "name": "sub-00376"
+  },
+  "spec": {
+    "title": "Sub Folder 00376"
+  }
+}

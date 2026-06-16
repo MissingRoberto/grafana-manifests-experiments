@@ -1,0 +1,24 @@
+apiVersion: dashboard.grafana.app/v1beta1
+kind: Dashboard
+metadata:
+  name: dash-03642
+spec:
+  title: Dashboard 03642
+  schemaVersion: 39
+  tags:
+    - demo
+    - gitsync
+  time:
+    from: now-6h
+    to: now
+  panels:
+    - type: timeseries
+      title: Requests / sec
+      gridPos:
+        h: 8
+        w: 12
+        x: 0
+        y: 0
+      targets:
+        - refId: A
+          expr: rate(http_requests_total[5m])
