@@ -1,0 +1,20 @@
+apiVersion: playlist.grafana.app/v1
+kind: Playlist
+metadata:
+  name: ci-cd-pipelines
+  namespace: default
+  labels:
+    team: devex
+    domain: ci-cd
+spec:
+  title: CI/CD Pipelines
+  interval: 5m
+  items:
+    - type: dashboard_by_tag
+      value: ci-cd
+    - type: dashboard_by_uid
+      value: build-durations
+    - type: dashboard_by_uid
+      value: deployment-frequency
+    - type: dashboard_by_uid
+      value: dora-metrics

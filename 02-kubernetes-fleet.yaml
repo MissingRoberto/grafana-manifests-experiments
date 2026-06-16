@@ -1,0 +1,20 @@
+apiVersion: playlist.grafana.app/v1
+kind: Playlist
+metadata:
+  name: k8s-fleet
+  namespace: default
+  labels:
+    team: platform
+    domain: kubernetes
+spec:
+  title: Kubernetes Fleet
+  interval: 30s
+  items:
+    - type: dashboard_by_uid
+      value: k8s-cluster-overview
+    - type: dashboard_by_uid
+      value: k8s-node-resources
+    - type: dashboard_by_uid
+      value: k8s-pod-resources
+    - type: dashboard_by_tag
+      value: namespaces
