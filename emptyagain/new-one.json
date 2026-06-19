@@ -36,7 +36,20 @@
         "items": []
       }
     },
-    "links": [],
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/MissingRoberto/grafana-manifests-experiments/blob/main/emptyagain/new-one.json"
+      }
+    ],
     "liveNow": false,
     "preferences": {
       "layout": {
@@ -68,7 +81,7 @@
       "timezone": "browser",
       "to": "now"
     },
-    "title": "New one",
+    "title": "Changed",
     "variables": []
   }
 }
