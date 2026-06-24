@@ -1,20 +1,18 @@
 apiVersion: playlist.grafana.app/v1
 kind: Playlist
 metadata:
-  name: security-monitoring
-  namespace: default
-  labels:
-    team: security
-    domain: soc
+    name: security-monitoring
 spec:
-  title: Security Monitoring
-  interval: 2m
-  items:
-    - type: dashboard_by_tag
-      value: security
-    - type: dashboard_by_uid
-      value: auth-failures
-    - type: dashboard_by_uid
-      value: waf-events
-    - type: dashboard_by_tag
-      value: audit
+    interval: 2m
+    items:
+        - type: dashboard_by_tag
+          value: security
+        - type: dashboard_by_uid
+          value: auth-failures
+        - type: dashboard_by_uid
+          value: waf-events
+        - type: dashboard_by_tag
+          value: audit
+        - type: dashboard_by_uid
+          value: admsjdg
+    title: Security Monitoring
