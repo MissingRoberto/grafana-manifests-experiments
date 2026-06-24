@@ -1,0 +1,17 @@
+{
+  "apiVersion": "playlist.grafana.app/v1",
+  "kind": "Playlist",
+  "metadata": {
+    "name": "xuygp7ptp3q8"
+  },
+  "spec": {
+    "interval": "5m",
+    "items": [
+      {
+        "type": "dashboard_by_uid",
+        "value": "admsjdg"
+      }
+    ],
+    "title": "New one branch"
+  }
+}
