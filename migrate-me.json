@@ -1,0 +1,17 @@
+{
+  "apiVersion": "playlist.grafana.app/v1",
+  "kind": "Playlist",
+  "metadata": {
+    "name": "adddbtp"
+  },
+  "spec": {
+    "interval": "5m",
+    "items": [
+      {
+        "type": "dashboard_by_uid",
+        "value": "adlhkbx"
+      }
+    ],
+    "title": "Migrate Me"
+  }
+}
