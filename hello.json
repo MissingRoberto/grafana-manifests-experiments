@@ -1,0 +1,17 @@
+{
+  "apiVersion": "playlist.grafana.app/v1",
+  "kind": "Playlist",
+  "metadata": {
+    "name": "djsj4dseemnt"
+  },
+  "spec": {
+    "interval": "5m",
+    "items": [
+      {
+        "type": "dashboard_by_uid",
+        "value": "admsjdg"
+      }
+    ],
+    "title": "hello"
+  }
+}
