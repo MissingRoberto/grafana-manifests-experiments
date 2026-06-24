@@ -1,20 +1,18 @@
 apiVersion: playlist.grafana.app/v1
 kind: Playlist
 metadata:
-  name: app-performance
-  namespace: default
-  labels:
-    team: backend
-    domain: apm
+    name: app-performance
 spec:
-  title: Application Performance
-  interval: 2m
-  items:
-    - type: dashboard_by_tag
-      value: apm
-    - type: dashboard_by_uid
-      value: service-latency-p99
-    - type: dashboard_by_uid
-      value: jvm-runtime
-    - type: dashboard_by_uid
-      value: go-runtime-metrics
+    interval: 2m
+    items:
+        - type: dashboard_by_tag
+          value: apm
+        - type: dashboard_by_uid
+          value: service-latency-p99
+        - type: dashboard_by_uid
+          value: jvm-runtime
+        - type: dashboard_by_uid
+          value: go-runtime-metrics
+        - type: dashboard_by_uid
+          value: admsjdg
+    title: Application Performance
