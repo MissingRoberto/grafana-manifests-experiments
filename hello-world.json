@@ -1,0 +1,21 @@
+{
+  "apiVersion": "playlist.grafana.app/v1",
+  "kind": "Playlist",
+  "metadata": {
+    "name": "258400p9w1jw"
+  },
+  "spec": {
+    "interval": "5m",
+    "items": [
+      {
+        "type": "dashboard_by_uid",
+        "value": "admsjdg"
+      },
+      {
+        "type": "dashboard_by_uid",
+        "value": "admsjdg"
+      }
+    ],
+    "title": "Hello World"
+  }
+}
