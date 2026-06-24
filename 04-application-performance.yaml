@@ -17,4 +17,6 @@ spec:
           value: admsjdg
         - type: dashboard_by_uid
           value: admsjdg
+        - type: dashboard_by_uid
+          value: admsjdg
     title: Application Performance
