@@ -9,47 +9,48 @@
     }
   },
   "spec": {
+    "type": "timeseries",
+    "pluginVersion": "11.0.0",
     "title": "Request Rate",
     "description": "Reusable RED-method request rate panel (requests/sec by route).",
-    "type": "timeseries",
-    "schemaVersion": 39,
-    "version": 1,
-    "model": {
-      "type": "timeseries",
-      "title": "Request Rate",
-      "description": "Requests per second by route",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
+    "options": {
+      "legend": {
+        "displayMode": "table",
+        "placement": "bottom",
+        "calcs": [
+          "mean",
+          "lastNotNull"
+        ]
       },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "reqps",
-          "min": 0,
-          "custom": {
-            "drawStyle": "line",
-            "fillOpacity": 15
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "calcs": ["mean", "lastNotNull"]
-        },
-        "tooltip": {
-          "mode": "multi"
+      "tooltip": {
+        "mode": "multi"
+      }
+    },
+    "fieldConfig": {
+      "defaults": {
+        "unit": "reqps",
+        "min": 0,
+        "custom": {
+          "drawStyle": "line",
+          "fillOpacity": 15
         }
       },
-      "targets": [
-        {
-          "refId": "A",
-          "expr": "sum by (route) (rate(http_requests_total[5m]))",
-          "legendFormat": "{{route}}"
-        }
-      ]
-    }
+      "overrides": []
+    },
+    "datasource": {
+      "type": "prometheus",
+      "uid": "${datasource}"
+    },
+    "targets": [
+      {
+        "refId": "A",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "expr": "sum by (route) (rate(http_requests_total[5m]))",
+        "legendFormat": "{{route}}"
+      }
+    ]
   }
 }

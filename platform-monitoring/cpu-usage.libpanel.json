@@ -9,52 +9,53 @@
     }
   },
   "spec": {
-    "title": "CPU Usage",
-    "description": "Reusable CPU utilization panel broken down by mode. Shared across all platform dashboards.",
     "type": "timeseries",
-    "schemaVersion": 39,
-    "version": 1,
-    "model": {
-      "type": "timeseries",
-      "title": "CPU Usage",
-      "description": "CPU utilization by mode",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
+    "pluginVersion": "11.0.0",
+    "title": "CPU Usage",
+    "description": "Reusable CPU utilization panel. Shared across all platform dashboards.",
+    "options": {
+      "legend": {
+        "displayMode": "table",
+        "placement": "right",
+        "calcs": [
+          "mean",
+          "max"
+        ]
       },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent",
-          "min": 0,
-          "max": 100,
-          "custom": {
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "stacking": {
-              "mode": "normal",
-              "group": "A"
-            }
+      "tooltip": {
+        "mode": "multi"
+      }
+    },
+    "fieldConfig": {
+      "defaults": {
+        "unit": "percent",
+        "min": 0,
+        "max": 100,
+        "custom": {
+          "drawStyle": "line",
+          "fillOpacity": 20,
+          "stacking": {
+            "mode": "normal",
+            "group": "A"
           }
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "calcs": ["mean", "max"]
-        },
-        "tooltip": {
-          "mode": "multi"
         }
       },
-      "targets": [
-        {
-          "refId": "A",
-          "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
-          "legendFormat": "{{instance}}"
-        }
-      ]
-    }
+      "overrides": []
+    },
+    "datasource": {
+      "type": "prometheus",
+      "uid": "${datasource}"
+    },
+    "targets": [
+      {
+        "refId": "A",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+        "legendFormat": "{{instance}}"
+      }
+    ]
   }
 }

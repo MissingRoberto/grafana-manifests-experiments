@@ -7,7 +7,11 @@
   "spec": {
     "title": "Host Overview",
     "description": "Per-host CPU, memory and load. Built mostly from shared library panels.",
-    "tags": ["infrastructure", "platform", "nodes"],
+    "tags": [
+      "infrastructure",
+      "platform",
+      "nodes"
+    ],
     "editable": true,
     "preload": false,
     "liveNow": false,
@@ -18,7 +22,13 @@
       "from": "now-6h",
       "to": "now",
       "autoRefresh": "30s",
-      "autoRefreshIntervals": ["10s", "30s", "1m", "5m", "15m"],
+      "autoRefreshIntervals": [
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m"
+      ],
       "timezone": "browser",
       "hideTimepicker": false,
       "fiscalYearStartMonth": 0
@@ -28,12 +38,20 @@
         "kind": "DatasourceVariable",
         "spec": {
           "name": "datasource",
-          "label": "Data source",
           "pluginId": "prometheus",
+          "refresh": "never",
+          "regex": "",
           "current": {
             "text": "Prometheus",
             "value": "prometheus"
-          }
+          },
+          "options": [],
+          "multi": false,
+          "includeAll": false,
+          "label": "Data source",
+          "hide": "dontHide",
+          "skipUrlSync": false,
+          "allowCustomValue": true
         }
       }
     ],
@@ -74,15 +92,20 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "refId": "A",
-                    "hidden": false,
                     "query": {
-                      "kind": "prometheus",
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
                       "spec": {
                         "expr": "node_load1",
                         "legendFormat": "{{instance}}"
                       }
-                    }
+                    },
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
@@ -91,9 +114,10 @@
             }
           },
           "vizConfig": {
-            "kind": "timeseries",
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "11.0.0",
             "spec": {
-              "pluginVersion": "11.0.0",
               "options": {},
               "fieldConfig": {
                 "defaults": {

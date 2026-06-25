@@ -1,0 +1,11 @@
+{
+  "apiVersion": "folder.grafana.app/v1",
+  "kind": "Folder",
+  "metadata": {
+    "name": "platform-monitoring"
+  },
+  "spec": {
+    "title": "Platform Monitoring",
+    "description": "Infrastructure and Kubernetes dashboards plus the shared CPU/Memory library panels."
+  }
+}

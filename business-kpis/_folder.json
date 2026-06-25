@@ -1,0 +1,11 @@
+{
+  "apiVersion": "folder.grafana.app/v1",
+  "kind": "Folder",
+  "metadata": {
+    "name": "business-kpis"
+  },
+  "spec": {
+    "title": "Business KPIs",
+    "description": "Executive and business dashboards plus the shared revenue KPI library panel."
+  }
+}

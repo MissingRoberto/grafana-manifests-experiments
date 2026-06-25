@@ -16,18 +16,21 @@ self-contained, portable unit you can sync, copy, or delete as a whole.
 ```
 .
 ├── platform-monitoring/          # Folder: Platform Monitoring
+│   ├── _folder.json                  # Folder metadata (stable UID + title)
 │   ├── cpu-usage.libpanel.json       # LibraryPanel: CPU Usage
 │   ├── memory-usage.libpanel.json    # LibraryPanel: Memory Usage
 │   ├── host-overview.json            # Dashboard  → reuses CPU + Memory
 │   └── kubernetes-cluster.json       # Dashboard  → reuses CPU + Memory
 │
 ├── application-observability/    # Folder: Application Observability
+│   ├── _folder.json                  # Folder metadata
 │   ├── request-rate.libpanel.json    # LibraryPanel: Request Rate (RED)
 │   ├── error-ratio.libpanel.json     # LibraryPanel: Error Ratio (RED)
 │   ├── api-gateway.json              # Dashboard  → reuses Request Rate + Error Ratio
 │   └── service-health.json           # Dashboard  → reuses Request Rate + Error Ratio
 │
 ├── business-kpis/                # Folder: Business KPIs
+│   ├── _folder.json                  # Folder metadata
 │   ├── revenue-kpi.libpanel.json     # LibraryPanel: Revenue (Today)
 │   └── executive-summary.json        # Dashboard  → reuses Revenue KPI
 │
@@ -37,13 +40,34 @@ self-contained, portable unit you can sync, copy, or delete as a whole.
 `*.libpanel.json` is a naming convention used here to make library panels easy to spot —
 Grafana routes resources by their `kind`, not the filename.
 
+### `_folder.json`
+
+Each directory carries a `_folder.json` so its Grafana folder gets a **stable UID** (the
+resource's `metadata.name`). Without it, Git Sync auto-generates the folder UID and it may
+change on the next sync. The file is a standard `folder.grafana.app/v1` `Folder` resource:
+
+```json
+{
+  "apiVersion": "folder.grafana.app/v1",
+  "kind": "Folder",
+  "metadata": { "name": "platform-monitoring" },
+  "spec": { "title": "Platform Monitoring", "description": "..." }
+}
+```
+
+> Folder UIDs must be ≤ 40 characters.
+
 ## Resource kinds
 
 | File pattern          | `apiVersion`                        | `kind`         |
 | --------------------- | ----------------------------------- | -------------- |
 | `*.json` (dashboards) | `dashboard.grafana.app/v2`          | `Dashboard`    |
 | `*.libpanel.json`     | `dashboard.grafana.app/v0alpha1`    | `LibraryPanel` |
+| `_folder.json`        | `folder.grafana.app/v1`             | `Folder`       |
 | `*.yaml` (playlists)  | `playlist.grafana.app/v1`           | `Playlist`     |
+
+A `LibraryPanel` spec is a **flattened panel** — `type`, `options`, `fieldConfig`,
+`datasource` and `targets` live directly under `spec` (there is no nested `model`).
 
 ## How dashboards reference library panels
 

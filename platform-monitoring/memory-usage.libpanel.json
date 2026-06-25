@@ -9,47 +9,48 @@
     }
   },
   "spec": {
+    "type": "timeseries",
+    "pluginVersion": "11.0.0",
     "title": "Memory Usage",
     "description": "Reusable memory utilization panel. Shared across all platform dashboards.",
-    "type": "timeseries",
-    "schemaVersion": 39,
-    "version": 1,
-    "model": {
-      "type": "timeseries",
-      "title": "Memory Usage",
-      "description": "Used vs available memory",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
+    "options": {
+      "legend": {
+        "displayMode": "table",
+        "placement": "right",
+        "calcs": [
+          "last",
+          "max"
+        ]
       },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "bytes",
-          "min": 0,
-          "custom": {
-            "drawStyle": "line",
-            "fillOpacity": 25
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "calcs": ["last", "max"]
-        },
-        "tooltip": {
-          "mode": "multi"
+      "tooltip": {
+        "mode": "multi"
+      }
+    },
+    "fieldConfig": {
+      "defaults": {
+        "unit": "bytes",
+        "min": 0,
+        "custom": {
+          "drawStyle": "line",
+          "fillOpacity": 25
         }
       },
-      "targets": [
-        {
-          "refId": "A",
-          "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes",
-          "legendFormat": "{{instance}} used"
-        }
-      ]
-    }
+      "overrides": []
+    },
+    "datasource": {
+      "type": "prometheus",
+      "uid": "${datasource}"
+    },
+    "targets": [
+      {
+        "refId": "A",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes",
+        "legendFormat": "{{instance}} used"
+      }
+    ]
   }
 }

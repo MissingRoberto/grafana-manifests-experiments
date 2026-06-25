@@ -1,0 +1,11 @@
+{
+  "apiVersion": "folder.grafana.app/v1",
+  "kind": "Folder",
+  "metadata": {
+    "name": "application-observability"
+  },
+  "spec": {
+    "title": "Application Observability",
+    "description": "RED-method application dashboards plus the shared request-rate/error-ratio library panels."
+  }
+}
