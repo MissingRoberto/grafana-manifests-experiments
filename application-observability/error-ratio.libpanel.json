@@ -1,0 +1,57 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "LibraryPanel",
+  "metadata": {
+    "name": "lib-error-ratio",
+    "labels": {
+      "team": "app",
+      "category": "golden-signals"
+    }
+  },
+  "spec": {
+    "title": "Error Ratio",
+    "description": "Reusable RED-method error ratio panel (5xx as a fraction of all requests).",
+    "type": "stat",
+    "schemaVersion": 39,
+    "version": 1,
+    "model": {
+      "type": "stat",
+      "title": "Error Ratio",
+      "description": "Percentage of 5xx responses",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 0.01 },
+              { "color": "red", "value": 0.05 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"]
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(rate(http_requests_total{status=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m]))",
+          "legendFormat": "error ratio"
+        }
+      ]
+    }
+  }
+}

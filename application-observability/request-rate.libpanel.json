@@ -1,0 +1,55 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "LibraryPanel",
+  "metadata": {
+    "name": "lib-request-rate",
+    "labels": {
+      "team": "app",
+      "category": "golden-signals"
+    }
+  },
+  "spec": {
+    "title": "Request Rate",
+    "description": "Reusable RED-method request rate panel (requests/sec by route).",
+    "type": "timeseries",
+    "schemaVersion": 39,
+    "version": 1,
+    "model": {
+      "type": "timeseries",
+      "title": "Request Rate",
+      "description": "Requests per second by route",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": ["mean", "lastNotNull"]
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by (route) (rate(http_requests_total[5m]))",
+          "legendFormat": "{{route}}"
+        }
+      ]
+    }
+  }
+}

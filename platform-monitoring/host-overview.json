@@ -1,0 +1,157 @@
+{
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "host-overview"
+  },
+  "spec": {
+    "title": "Host Overview",
+    "description": "Per-host CPU, memory and load. Built mostly from shared library panels.",
+    "tags": ["infrastructure", "platform", "nodes"],
+    "editable": true,
+    "preload": false,
+    "liveNow": false,
+    "cursorSync": "Off",
+    "links": [],
+    "annotations": [],
+    "timeSettings": {
+      "from": "now-6h",
+      "to": "now",
+      "autoRefresh": "30s",
+      "autoRefreshIntervals": ["10s", "30s", "1m", "5m", "15m"],
+      "timezone": "browser",
+      "hideTimepicker": false,
+      "fiscalYearStartMonth": 0
+    },
+    "variables": [
+      {
+        "kind": "DatasourceVariable",
+        "spec": {
+          "name": "datasource",
+          "label": "Data source",
+          "pluginId": "prometheus",
+          "current": {
+            "text": "Prometheus",
+            "value": "prometheus"
+          }
+        }
+      }
+    ],
+    "elements": {
+      "cpu": {
+        "kind": "LibraryPanel",
+        "spec": {
+          "id": 1,
+          "title": "CPU Usage",
+          "libraryPanel": {
+            "uid": "lib-cpu-usage",
+            "name": "CPU Usage"
+          }
+        }
+      },
+      "memory": {
+        "kind": "LibraryPanel",
+        "spec": {
+          "id": 2,
+          "title": "Memory Usage",
+          "libraryPanel": {
+            "uid": "lib-memory-usage",
+            "name": "Memory Usage"
+          }
+        }
+      },
+      "load": {
+        "kind": "Panel",
+        "spec": {
+          "id": 3,
+          "title": "Load Average (1m)",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "refId": "A",
+                    "hidden": false,
+                    "query": {
+                      "kind": "prometheus",
+                      "spec": {
+                        "expr": "node_load1",
+                        "legendFormat": "{{instance}}"
+                      }
+                    }
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "timeseries",
+            "spec": {
+              "pluginVersion": "11.0.0",
+              "options": {},
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "short",
+                  "min": 0
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 0,
+              "width": 12,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "cpu"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 12,
+              "y": 0,
+              "width": 12,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "memory"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 8,
+              "width": 24,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "load"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

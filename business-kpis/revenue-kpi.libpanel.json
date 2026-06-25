@@ -1,0 +1,57 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "LibraryPanel",
+  "metadata": {
+    "name": "lib-revenue-kpi",
+    "labels": {
+      "team": "business",
+      "category": "kpi"
+    }
+  },
+  "spec": {
+    "title": "Revenue (Today)",
+    "description": "Reusable big-number KPI panel for today's revenue. Reused across exec and finance dashboards.",
+    "type": "stat",
+    "schemaVersion": 39,
+    "version": 1,
+    "model": {
+      "type": "stat",
+      "title": "Revenue (Today)",
+      "description": "Total booked revenue for the current day",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 50000 },
+              { "color": "green", "value": 100000 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "value_and_name",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"]
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(increase(orders_revenue_usd_total[24h]))",
+          "legendFormat": "revenue"
+        }
+      ]
+    }
+  }
+}

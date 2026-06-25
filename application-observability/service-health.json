@@ -1,0 +1,157 @@
+{
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "service-health"
+  },
+  "spec": {
+    "title": "Service Health",
+    "description": "Per-service health summary reusing the shared Error Ratio and Request Rate library panels.",
+    "tags": ["application", "slo", "golden-signals"],
+    "editable": true,
+    "preload": false,
+    "liveNow": false,
+    "cursorSync": "Off",
+    "links": [],
+    "annotations": [],
+    "timeSettings": {
+      "from": "now-24h",
+      "to": "now",
+      "autoRefresh": "5m",
+      "autoRefreshIntervals": ["1m", "5m", "15m", "30m"],
+      "timezone": "browser",
+      "hideTimepicker": false,
+      "fiscalYearStartMonth": 0
+    },
+    "variables": [
+      {
+        "kind": "DatasourceVariable",
+        "spec": {
+          "name": "datasource",
+          "label": "Data source",
+          "pluginId": "prometheus",
+          "current": {
+            "text": "Prometheus",
+            "value": "prometheus"
+          }
+        }
+      }
+    ],
+    "elements": {
+      "rate": {
+        "kind": "LibraryPanel",
+        "spec": {
+          "id": 1,
+          "title": "Request Rate",
+          "libraryPanel": {
+            "uid": "lib-request-rate",
+            "name": "Request Rate"
+          }
+        }
+      },
+      "errors": {
+        "kind": "LibraryPanel",
+        "spec": {
+          "id": 2,
+          "title": "Error Ratio",
+          "libraryPanel": {
+            "uid": "lib-error-ratio",
+            "name": "Error Ratio"
+          }
+        }
+      },
+      "saturation": {
+        "kind": "Panel",
+        "spec": {
+          "id": 3,
+          "title": "In-flight Requests",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "refId": "A",
+                    "hidden": false,
+                    "query": {
+                      "kind": "prometheus",
+                      "spec": {
+                        "expr": "sum by (service) (http_requests_in_flight)",
+                        "legendFormat": "{{service}}"
+                      }
+                    }
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "timeseries",
+            "spec": {
+              "pluginVersion": "11.0.0",
+              "options": {},
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "short",
+                  "min": 0
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 0,
+              "width": 16,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "rate"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 16,
+              "y": 0,
+              "width": 8,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "errors"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 8,
+              "width": 24,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "saturation"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

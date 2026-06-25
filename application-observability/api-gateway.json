@@ -1,0 +1,157 @@
+{
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "api-gateway"
+  },
+  "spec": {
+    "title": "API Gateway",
+    "description": "RED-method overview for the API gateway, assembled from shared golden-signal library panels.",
+    "tags": ["application", "api", "golden-signals"],
+    "editable": true,
+    "preload": false,
+    "liveNow": false,
+    "cursorSync": "Crosshair",
+    "links": [],
+    "annotations": [],
+    "timeSettings": {
+      "from": "now-1h",
+      "to": "now",
+      "autoRefresh": "30s",
+      "autoRefreshIntervals": ["10s", "30s", "1m", "5m"],
+      "timezone": "browser",
+      "hideTimepicker": false,
+      "fiscalYearStartMonth": 0
+    },
+    "variables": [
+      {
+        "kind": "DatasourceVariable",
+        "spec": {
+          "name": "datasource",
+          "label": "Data source",
+          "pluginId": "prometheus",
+          "current": {
+            "text": "Prometheus",
+            "value": "prometheus"
+          }
+        }
+      }
+    ],
+    "elements": {
+      "errors": {
+        "kind": "LibraryPanel",
+        "spec": {
+          "id": 1,
+          "title": "Error Ratio",
+          "libraryPanel": {
+            "uid": "lib-error-ratio",
+            "name": "Error Ratio"
+          }
+        }
+      },
+      "rate": {
+        "kind": "LibraryPanel",
+        "spec": {
+          "id": 2,
+          "title": "Request Rate",
+          "libraryPanel": {
+            "uid": "lib-request-rate",
+            "name": "Request Rate"
+          }
+        }
+      },
+      "latency": {
+        "kind": "Panel",
+        "spec": {
+          "id": 3,
+          "title": "p95 Latency",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "refId": "A",
+                    "hidden": false,
+                    "query": {
+                      "kind": "prometheus",
+                      "spec": {
+                        "expr": "histogram_quantile(0.95, sum by (le, route) (rate(http_request_duration_seconds_bucket[5m])))",
+                        "legendFormat": "{{route}}"
+                      }
+                    }
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "timeseries",
+            "spec": {
+              "pluginVersion": "11.0.0",
+              "options": {},
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "s",
+                  "min": 0
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 0,
+              "width": 6,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "errors"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 6,
+              "y": 0,
+              "width": 18,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "rate"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 0,
+              "y": 8,
+              "width": 24,
+              "height": 8,
+              "element": {
+                "kind": "ElementReference",
+                "name": "latency"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
