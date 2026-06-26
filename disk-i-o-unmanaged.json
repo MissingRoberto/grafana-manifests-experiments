@@ -1,0 +1,53 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "LibraryPanel",
+  "metadata": {
+    "name": "unmanaged-disk-io"
+  },
+  "spec": {
+    "datasource": {
+      "type": "prometheus",
+      "uid": "${datasource}"
+    },
+    "description": "Unmanaged panel created via API for migrate testing.",
+    "fieldConfig": {
+      "defaults": {
+        "custom": {
+          "drawStyle": "line",
+          "fillOpacity": 10
+        },
+        "unit": "Bps"
+      },
+      "overrides": []
+    },
+    "gridPos": {
+      "h": 8,
+      "w": 12,
+      "x": 0,
+      "y": 0
+    },
+    "options": {
+      "legend": {
+        "displayMode": "list",
+        "placement": "bottom"
+      },
+      "tooltip": {
+        "mode": "single"
+      }
+    },
+    "pluginVersion": "11.0.0",
+    "targets": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "expr": "rate(node_disk_read_bytes_total[5m])",
+        "legendFormat": "{{instance}}",
+        "refId": "A"
+      }
+    ],
+    "title": "Disk I/O (unmanaged)",
+    "type": "timeseries"
+  }
+}
