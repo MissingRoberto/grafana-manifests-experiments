@@ -2,7 +2,8 @@
   "apiVersion": "dashboard.grafana.app/v1beta1",
   "kind": "Dashboard",
   "metadata": {
-    "name": "api-performance"
+    "name": "api-performance",
+    "namespace": "default"
   },
   "spec": {
     "annotations": {

@@ -2,7 +2,8 @@
   "apiVersion": "dashboard.grafana.app/v1beta1",
   "kind": "Dashboard",
   "metadata": {
-    "name": "revenue-metrics"
+    "name": "revenue-metrics",
+    "namespace": "stacks-999999"
   },
   "spec": {
     "annotations": {
