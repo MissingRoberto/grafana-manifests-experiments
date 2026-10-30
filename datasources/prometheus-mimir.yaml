@@ -1,0 +1,24 @@
+apiVersion: prometheus.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: prometheus-mimir
+  labels:
+    team: platform
+    env: prod
+spec:
+  title: Mimir
+  access: proxy
+  url: https://mimir.example.com/prometheus
+  basicAuth: true
+  basicAuthUser: "123456"
+  jsonData:
+    httpMethod: POST
+    prometheusType: Mimir
+    prometheusVersion: 2.9.0
+    timeInterval: 60s
+    httpHeaderName1: X-Scope-OrgID
+secure:
+  basicAuthPassword:
+    name: mimir-api-token
+  httpHeaderValue1:
+    name: mimir-tenant-id

@@ -1,0 +1,21 @@
+apiVersion: loki.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: loki-logs
+  labels:
+    team: platform
+    env: prod
+spec:
+  title: Loki
+  access: proxy
+  url: http://loki.monitoring.svc:3100
+  jsonData:
+    maxLines: 1000
+    timeout: 60
+    alertmanagerUid: alertmanager-main
+    derivedFields:
+      - name: TraceID
+        matcherType: label
+        matcherRegex: traceID
+        url: "${__value.raw}"
+        datasourceUid: tempo-traces

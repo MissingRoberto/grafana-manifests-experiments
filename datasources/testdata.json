@@ -1,0 +1,15 @@
+{
+  "apiVersion": "grafana-testdata-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "name": "testdata",
+    "labels": {
+      "team": "platform",
+      "env": "dev"
+    }
+  },
+  "spec": {
+    "title": "TestData",
+    "access": "proxy"
+  }
+}

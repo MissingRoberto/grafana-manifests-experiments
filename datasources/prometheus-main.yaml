@@ -1,0 +1,21 @@
+apiVersion: prometheus.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: prometheus-main
+  labels:
+    team: platform
+    env: prod
+spec:
+  title: Prometheus (main)
+  access: proxy
+  url: http://prometheus.monitoring.svc:9090
+  isDefault: true
+  jsonData:
+    httpMethod: POST
+    prometheusType: Prometheus
+    prometheusVersion: 2.55.0
+    timeInterval: 30s
+    cacheLevel: Low
+    incrementalQuerying: true
+    incrementalQueryOverlapWindow: 10m
+    manageAlerts: true

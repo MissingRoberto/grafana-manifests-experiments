@@ -1,0 +1,15 @@
+apiVersion: prometheus.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: prometheus-readonly
+  labels:
+    team: platform
+    env: prod
+spec:
+  title: Prometheus (read-only)
+  access: proxy
+  url: http://prometheus.monitoring.svc:9090
+  readOnly: true
+  jsonData:
+    httpMethod: GET
+    prometheusType: Prometheus

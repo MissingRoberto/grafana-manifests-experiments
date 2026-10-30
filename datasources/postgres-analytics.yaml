@@ -1,0 +1,23 @@
+apiVersion: grafana-postgresql-datasource.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: postgres-analytics
+  labels:
+    team: analytics
+    env: prod
+spec:
+  title: Postgres (analytics)
+  access: proxy
+  url: postgres.analytics.svc:5432
+  user: grafana_reader
+  database: analytics
+  jsonData:
+    sslmode: verify-full
+    postgresVersion: 1500
+    timescaledb: false
+    maxOpenConns: 10
+    maxIdleConns: 10
+    connMaxLifetime: 14400
+secure:
+  password:
+    name: postgres-analytics-password

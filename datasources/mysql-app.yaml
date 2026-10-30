@@ -1,0 +1,21 @@
+apiVersion: mysql.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: mysql-app
+  labels:
+    team: analytics
+    env: staging
+spec:
+  title: MySQL (app)
+  access: proxy
+  url: mysql.app.svc:3306
+  user: grafana_reader
+  database: app
+  jsonData:
+    maxOpenConns: 10
+    maxIdleConns: 10
+    connMaxLifetime: 14400
+    timeInterval: 1m
+secure:
+  password:
+    name: mysql-app-password

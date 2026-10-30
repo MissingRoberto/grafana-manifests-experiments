@@ -1,0 +1,14 @@
+apiVersion: graphite.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: graphite-legacy
+  labels:
+    team: platform
+    env: prod
+spec:
+  title: Graphite (legacy)
+  access: proxy
+  url: http://graphite.monitoring.svc:8080
+  jsonData:
+    graphiteVersion: "1.1"
+    graphiteType: default

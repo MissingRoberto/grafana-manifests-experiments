@@ -1,0 +1,14 @@
+apiVersion: prometheus.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: prometheus-team-a
+  labels:
+    team: team-a
+    env: prod
+spec:
+  title: Prometheus (team A)
+  access: proxy
+  url: http://prometheus.team-a.svc:9090
+  jsonData:
+    httpMethod: POST
+    prometheusType: Prometheus

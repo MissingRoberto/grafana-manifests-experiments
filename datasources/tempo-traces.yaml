@@ -1,0 +1,28 @@
+apiVersion: tempo.datasource.grafana.app/v0alpha1
+kind: DataSource
+metadata:
+  name: tempo-traces
+  labels:
+    team: platform
+    env: prod
+spec:
+  title: Tempo
+  access: proxy
+  url: http://tempo.monitoring.svc:3200
+  jsonData:
+    nodeGraph:
+      enabled: true
+    serviceMap:
+      datasourceUid: prometheus-main
+    tracesToLogsV2:
+      datasourceUid: loki-logs
+      spanStartTimeShift: -1h
+      spanEndTimeShift: 1h
+      filterByTraceID: true
+      tags:
+        - key: service.name
+          value: service_name
+    tracesToMetrics:
+      datasourceUid: prometheus-main
+      spanStartTimeShift: -2m
+      spanEndTimeShift: 2m
