@@ -21,4 +21,5 @@ spec:
     logLevelField: level
 secure:
   basicAuthPassword:
-    name: elasticsearch-password
+    create: fake-elastic-password-not-a-real-credential
+    description: Elasticsearch basic auth password

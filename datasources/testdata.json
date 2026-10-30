@@ -11,5 +11,11 @@
   "spec": {
     "title": "TestData",
     "access": "proxy"
+  },
+  "secure": {
+    "sampleA": {
+      "create": "fake-value-not-a-real-credential",
+      "description": "Example secure value in JSON form"
+    }
   }
 }

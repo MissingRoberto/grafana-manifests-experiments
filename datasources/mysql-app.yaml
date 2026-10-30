@@ -18,4 +18,5 @@ spec:
     timeInterval: 1m
 secure:
   password:
-    name: mysql-app-password
+    create: fake-mysql-password-not-a-real-credential
+    description: Password for grafana_reader

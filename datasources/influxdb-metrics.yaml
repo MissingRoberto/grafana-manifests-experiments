@@ -17,4 +17,5 @@ spec:
     timeInterval: 10s
 secure:
   token:
-    name: influxdb-token
+    create: fake-influx-token-not-a-real-credential
+    description: InfluxDB API token

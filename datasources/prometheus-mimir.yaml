@@ -19,6 +19,8 @@ spec:
     httpHeaderName1: X-Scope-OrgID
 secure:
   basicAuthPassword:
-    name: mimir-api-token
+    create: fake-mimir-token-not-a-real-credential
+    description: Mimir API token
   httpHeaderValue1:
-    name: mimir-tenant-id
+    create: "123456"
+    description: Mimir tenant ID

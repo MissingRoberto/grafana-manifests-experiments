@@ -52,17 +52,25 @@ legacy-to-resource converter writes; `spec.isDefault` and the label are equivale
 
 ## Secrets
 
-Passwords and tokens never go in the spec. The `secure` block holds references to values stored
-in the secrets service, so nothing sensitive is committed:
+Passwords and tokens never go in the spec. They live in the `secure` block, which mirrors
+`pkg/tests/apis/datasource/testdata/testdata-create.yaml` in grafana/grafana:
 
 ```yaml
 secure:
   basicAuthPassword:
-    name: mimir-api-token      # name of an existing SecureValue
+    create: secret value here  # stored on write, replaced by a UID in the response
+    description: Mimir API token
+  somethingElse:
+    name: XYZ                  # reference to an existing SecureValue
 ```
 
-The sibling `create:` form takes a plaintext value — only for direct API calls, never for a
-file in Git.
+These examples use `create:`, so syncing the branch creates the secure values rather than
+expecting them to already exist. **Every value here is a dummy placeholder** — they are
+deliberately named `fake-...-not-a-real-credential` and no real datasource will authenticate
+with them. Replace them with working values only in a private repository; anything written
+under `create:` is committed in plaintext.
+
+A third form, `remove: true`, deletes a value owned by the resource.
 
 ## Enabling datasource sync
 
@@ -86,7 +94,7 @@ differs from the repository's, so a hardcoded `default` breaks on any other stac
 | File                               | Covers                                                  |
 | ---------------------------------- | ------------------------------------------------------- |
 | `prometheus-main.yaml`             | default datasource, incremental querying                 |
-| `prometheus-mimir.yaml`            | basic auth plus a custom header, two secure references    |
+| `prometheus-mimir.yaml`            | basic auth plus a custom header, two created secure values |
 | `prometheus-readonly.yaml`         | `readOnly: true`                                          |
 | `loki-logs.yaml`                   | derived fields linking to Tempo                           |
 | `tempo-traces.yaml`                | nested `jsonData` (trace-to-logs/metrics, service map)    |
@@ -95,7 +103,7 @@ differs from the repository's, so a hardcoded `default` breaks on any other stac
 | `postgres-analytics.yaml`          | plugin ID that keeps its `grafana-`/`-datasource` affixes |
 | `mysql-app.yaml`                   | SQL connection pool settings                              |
 | `graphite-legacy.yaml`             | minimal spec, no secrets                                  |
-| `testdata.json`                    | JSON instead of YAML                                      |
+| `testdata.json`                    | JSON instead of YAML, secure value in JSON form           |
 | `teams/team-a/prometheus-team-a.yaml` | resource in a subdirectory                             |
 
 The UIDs cross-reference each other: `loki-logs` links traces to `tempo-traces`, and

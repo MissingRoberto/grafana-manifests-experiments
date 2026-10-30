@@ -20,4 +20,5 @@ spec:
     connMaxLifetime: 14400
 secure:
   password:
-    name: postgres-analytics-password
+    create: fake-postgres-password-not-a-real-credential
+    description: Password for grafana_reader
