@@ -1,25 +1,24 @@
 apiVersion: elasticsearch.datasource.grafana.app/v0alpha1
 kind: DataSource
 metadata:
-  name: elasticsearch-logs
-  labels:
-    team: platform
-    env: prod
-spec:
-  title: Elasticsearch (logs)
-  access: proxy
-  url: http://elasticsearch.logging.svc:9200
-  database: "[logs-]YYYY.MM.DD"
-  basicAuth: true
-  basicAuthUser: elastic
-  jsonData:
-    index: "[logs-]YYYY.MM.DD"
-    interval: Daily
-    timeField: "@timestamp"
-    maxConcurrentShardRequests: 5
-    logMessageField: message
-    logLevelField: level
+    name: elasticsearch-logs
 secure:
-  basicAuthPassword:
-    create: fake-elastic-password-not-a-real-credential
-    description: Elasticsearch basic auth password
+    basicAuthPassword:
+        name: lds-sv-a2c52e3da2ab722b1eaf3cfc9e730ee852f3829bdebeabd568d1b043d3367f85
+spec:
+    access: proxy
+    basicAuth: true
+    basicAuthUser: elastic
+    database: '[logs-]YYYY.MM.DD'
+    jsonData:
+        index: '[logs-]YYYY.MM.DD'
+        interval: Daily
+        logLevelField: level
+        logMessageField: message
+        maxConcurrentShardRequests: 5
+        pdcInjected: false
+        timeField: '@timestamp'
+    readOnly: false
+    title: Elasticsearch (logs)
+    url: http://elasticsearch.logging.svc:9201
+    user: ""
